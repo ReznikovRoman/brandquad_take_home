@@ -1,0 +1,8 @@
+-c requirements.txt
+
+ruff==0.6.1
+isort==5.13.2
+
+mypy==1.11.1
+django-stubs==5.0.4
+djangorestframework-stubs -e git+https://github.com/typeddjango/djangorestframework-stubs.git@5b9b6c2bef09d50f9665021f4c4de7424ee21884#egg=djangorestframework-stubs

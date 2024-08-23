@@ -1,0 +1,45 @@
+default_language_version:
+  python: "3.12"
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+  hooks:
+    - id: check-ast
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-toml
+    - id: debug-statements
+    - id: end-of-file-fixer
+    - id: mixed-line-ending
+    - id: trailing-whitespace
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: "v0.6.1"
+  hooks:
+    - id: ruff
+      args: [ "--fix" ]
+- repo: https://github.com/pycqa/isort
+  rev: "5.13.2"
+  hooks:
+    - id: isort
+      name: Run isort
+      alias: isort .
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: "v1.11.1"
+  hooks:
+    - id: mypy
+      name: Run mypy
+      args: [--config=./pyproject.toml, --ignore-missing-imports, --enable-incomplete-feature=NewGenericSyntax]
+      additional_dependencies:
+        [
+          ipython,
+          psycopg2,
+          django,
+          djangorestframework,
+          django-configurations,
+          django-extensions,
+          django-filter,
+          drf-spectacular,
+          django-debug-toolbar,
+          django-stubs,
+          https://github.com/typeddjango/djangorestframework-stubs/archive/5b9b6c2bef09d50f9665021f4c4de7424ee21884.zip,
+        ]

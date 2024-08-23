@@ -1,0 +1,115 @@
+[tool.mypy]
+plugins = [
+    "tools/mypy_plugins/mypy_django_configurations_plugin.py",
+    "mypy_drf_plugin.main",
+]
+
+exclude = ["venv", "/migrations/", "/statifiles/"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_return_any = true
+strict = true
+disallow_untyped_decorators = true
+disallow_any_generics = false
+implicit_reexport = false
+show_error_codes = true
+disable_error_code = "import-untyped"
+enable_incomplete_feature = ["NewGenericSyntax"]
+
+[tool.django-stubs]
+django_settings_module = "brandquad.settings"
+
+[tool.isort]
+line_length = 120
+lines_after_imports = -1
+multi_line_output = 5
+include_trailing_comma = true
+use_parentheses = true
+skip = [".git"]
+skip_glob = ["venv*", ".*", "staticfiles*"]
+default_section = "THIRDPARTY"
+known_django = "django"
+known_first_party = ["brandquad"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+src = ["brandquad"]
+exclude = ["venv*", "staticfiles*"]
+
+[tool.ruff.lint]
+select = [
+    "A", # flake8-builtins
+    "B", # flake8-bugbear
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
+    "C90", # mccabe
+    "D", # pydocstyle
+    "DJ", # flake8-django
+    "DTZ", # flake8-datetimez
+    "E", # pycodestyle errors
+    "ERA", # eradicate
+    "EXE", # flake8-executable
+    "F", # pyflakes
+    "G", # flake8-logging-format
+    "ICN", # flake8-import-conventions
+    "ISC", # flake8-implicit-str-concat
+    "N", # pep8-naming
+    "COM", # flake8-commas
+    "PIE", # flake8-pie
+    "PLC", # pylint - convention
+    "PLE", # pylint - error
+    "PLW", # pylint - warning
+    "PTH", # flake8-use-pathlib
+    "Q", # flake8-quotes
+    "RET", # flake8-return
+    "RUF", # Ruff-specific rules
+    "S", # flake8-bandit
+    "SIM", # flake8-simplify
+    "T10", # flake8-debugger
+    "T20", # flake8-print
+    "TCH", # flake8-type-checking
+    "TID", # flake8-tidy-imports
+    "UP", # pyupgrade
+    "W", # pycodestyle - warning
+    "YTT", # flake8-2020
+]
+ignore = [
+    "D100", # pydocstyle - missing docstring in public module
+    "D101", # pydocstyle - missing docstring in public class
+    "D102", # pydocstyle - missing docstring in public method
+    "D103", # pydocstyle - missing docstring in public function
+    "D104", # pydocstyle - missing docstring in public package
+    "D105", # pydocstyle - missing docstring in magic method
+    "D106", # pydocstyle - missing docstring in public nested class
+    "D107", # pydocstyle - missing docstring in __init__
+    "D401", # pydocstyle - first line of docstring should be in imperative mood
+    "UP037", # pyupgrade - removes quotes from type annotation
+    "UP006", # pyupgrade - use `type` instead of `Type` for type annotation
+    "SIM108", # ruff - use ternary operator instead of `if`-`else`-block
+]
+
+[tool.ruff.lint.per-file-ignores]
+"brandquad/settings/values.py" = ["A001", "A002", "UP035"]
+"brandquad/settings/**.py" = ["RUF012"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = [
+    "classmethod",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["brandquad"]
+
+# TODO: remove
+#[tool.ruff.lint.flake8-bugbear]
+#extend-immutable-calls = ["fastapi.Depends", "fastapi.params.Depends", "fastapi.Query", "fastapi.params.Query"]

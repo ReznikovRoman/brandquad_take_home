@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=${BQ_DB_USER}
+      - POSTGRES_PASSWORD=${BQ_DB_PASSWORD}
+      - POSTGRES_DB=${BQ_DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  server:
+    platform: linux/amd64
+    restart: always
+    build:
+      context: .
+    environment:
+      - DJANGO_SUPERUSER_EMAIL=admin@gmail.com
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=pass
+    env_file:
+      - $ENV
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: >
+      bash -c "cd /app
+      && django-cadmin migrate
+      && django-cadmin collectstatic --no-input
+      && django-cadmin createsuperuser --noinput || true
+      && django-cadmin runserver_plus --print-sql 0.0.0.0:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
