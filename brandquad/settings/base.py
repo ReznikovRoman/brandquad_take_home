@@ -45,7 +45,7 @@ class Base(Configuration):  # type: ignore[misc]
         "rest_framework.authtoken",
         "drf_spectacular",
 
-        # "brandquad.movies.apps.MoviesConfig",
+        "brandquad.observability.apps.ObservabilityConfig",
     ]
 
     MIDDLEWARE = [
@@ -85,7 +85,7 @@ class Base(Configuration):  # type: ignore[misc]
     ]
 
     # Internationalization
-    LANGUAGE_CODE = "ru-ru"
+    LANGUAGE_CODE = "en-US"
     TIME_ZONE = "Europe/Moscow"
     USE_I18N = True
     USE_TZ = True

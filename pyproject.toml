@@ -38,7 +38,7 @@ sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLD
 target-version = "py312"
 line-length = 120
 src = ["brandquad"]
-exclude = ["venv*", "staticfiles*"]
+exclude = ["venv*", "staticfiles*", "migrations*"]
 
 [tool.ruff.lint]
 select = [
@@ -90,6 +90,7 @@ ignore = [
     "UP037", # pyupgrade - removes quotes from type annotation
     "UP006", # pyupgrade - use `type` instead of `Type` for type annotation
     "SIM108", # ruff - use ternary operator instead of `if`-`else`-block
+    "RUF012", # ruff - Mutable class attributes should be annotated with `typing.ClassVar`
 ]
 
 [tool.ruff.lint.per-file-ignores]
