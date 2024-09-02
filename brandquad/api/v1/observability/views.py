@@ -18,8 +18,8 @@ if TYPE_CHECKING:
 
 
 class NginxLogViewSet(
-    viewsets.GenericViewSet,
     mixins.ListModelMixin,
+    viewsets.GenericViewSet,
 ):
     """Viewset for working with nginx logs."""
 
